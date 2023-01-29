@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -40,7 +41,9 @@
     <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
         <img class="marqueee-image" src="./pexels-fu-zhichao-587741.jpg" alt="Marquee" width="1500" height="800">
         <div class="w3-display-middle w3-margin-top w3-center">
-            <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>MARQUEEE</b></span> <span class="w3-padding w3-black w3-opacity-min">Estimator</span></h1>
+            <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>MARQUEEE</b></span>
+                <span class="w3-padding w3-black w3-opacity-min">Estimator</span>
+            </h1>
         </div>
     </header>
 
@@ -49,22 +52,56 @@
         <h3 class=" w3-center w3-light-gray w3-border-bottom w3-border-light-grey ">Estimator</h3>
     </div>
     <!-- City -->
-    <div class="w3-center w3-margin">
-        <label for="city">SELECT CITY:</label>
+    <div class="w3-center w3-margin-top">
+        <label for="city"> CITY: </label>
         <select class="custom-select col-3" id="city" name="city">
-            <!-- <option selected value=""> Choose one</option> -->
-
+            <option selected value=""> Choose one</option>
             <?php
             $_string = "select DISTINCT City  from City ";
             $_result = mysqli_query($conn, $_string);
             while ($_row = mysqli_fetch_array($_result)) {
             ?>
-                <option value="<?php echo $_row["City"] ?> "><?php echo $_row["City"] ?></option>
+            <option value="<?php echo $_row["City"] ?> "><?php echo $_row["City"] ?></option>
             <?php
             }
             ?>
         </select>
 
+
+        <script>
+        // Fetching data from databese city table and display in dropdown menu
+        async function fetchData(value) {
+            const response = await fetch(`http://localhost/FRONtEND/marquee_dropdown.php?value=${value}`);
+            const data = await response.json();
+
+            const marquee = document.getElementById('marquee');
+            marquee.innerHTML = '<option selected value=""> Choose one</option>';
+
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.text = item.text;
+                marquee.appendChild(option);
+            });
+
+        }
+        // get the value of city dropdown menu and pass it to the function fetchData
+        function handleChange(event) {
+            const value = event.target.value;
+            if (value) {
+
+                fetchData(value);
+            }
+        }
+        // Adding the event listener to the city dropdown menu
+        const City = document.getElementById('city');
+        City.addEventListener('change', handleChange);
+        </script>
+        <!-- Marquee Name -->
+        <label for="marquee"> MARQUEE: </label>
+        <select class="custom-select col-3" id="marquee" name="marquee">
+            <option selected value=""> Choose one</option>
+        </select>
         <!-- capacity -->
         <label for="Capacity">SITTING CAPACITY</label>
         <select class="custom-select col-3" id="capacity" name="Capacity">
@@ -96,7 +133,7 @@
                 $_result = mysqli_query($conn, $_string);
                 while ($_row = mysqli_fetch_array($_result)) {
                 ?>
-                    <option value="<?php echo $_row['Price'] ?> "> <?php echo $_row['Dish']; ?></option>
+                <option value="<?php echo $_row['Price'] ?> "> <?php echo $_row['Dish']; ?></option>
 
                 <?php
                 }
@@ -114,7 +151,7 @@
                 $_result = mysqli_query($conn, $_string);
                 while ($_row = mysqli_fetch_array($_result)) {
                 ?>
-                    <option value="<?php echo $_row['Price'] ?> "> <?php echo $_row['Dish']; ?></option>
+                <option value="<?php echo $_row['Price'] ?> "> <?php echo $_row['Dish']; ?></option>
 
                 <?php
                 }
@@ -133,7 +170,7 @@
                     $_result = mysqli_query($conn, $_string);
                     while ($_row = mysqli_fetch_array($_result)) {
                     ?>
-                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dish']; ?></option>
+                    <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dish']; ?></option>
 
                     <?php
                     }
@@ -150,7 +187,7 @@
                     $_result = mysqli_query($conn, $_string);
                     while ($_row = mysqli_fetch_array($_result)) {
                     ?>
-                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dish']; ?></option>
+                    <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dish']; ?></option>
 
                     <?php
                     }
@@ -168,7 +205,7 @@
                     $_result = mysqli_query($conn, $_string);
                     while ($_row = mysqli_fetch_array($_result)) {
                     ?>
-                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Drink']; ?></option>
+                    <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Drink']; ?></option>
 
                     <?php
                     }
@@ -191,7 +228,7 @@
                         $_result = mysqli_query($conn, $_string);
                         while ($_row = mysqli_fetch_array($_result)) {
                         ?>
-                            <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Service']; ?></option>
+                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Service']; ?></option>
 
                         <?php
                         }
@@ -208,7 +245,7 @@
                         $_result = mysqli_query($conn, $_string);
                         while ($_row = mysqli_fetch_array($_result)) {
                         ?>
-                            <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Name']; ?></option>
+                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Name']; ?></option>
 
                         <?php
                         }
@@ -227,7 +264,7 @@
                         $_result = mysqli_query($conn, $_string);
                         while ($_row = mysqli_fetch_array($_result)) {
                         ?>
-                            <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dress']; ?></option>
+                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Dress']; ?></option>
 
                         <?php
                         }
@@ -244,7 +281,7 @@
                         $_result = mysqli_query($conn, $_string);
                         while ($_row = mysqli_fetch_array($_result)) {
                         ?>
-                            <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Car']; ?></option>
+                        <option value="<?php echo $_row['Price']; ?> "> <?php echo $_row['Car']; ?></option>
 
                         <?php
                         }
@@ -252,9 +289,11 @@
                         ?>
                     </select>
 
-                    <button href="javascript:void(0)" onclick="document.getElementById('userprofile').style.display='block'; price()" class=" w3-margin-bottom w3-button w3-right mt-3 btn-primary w3-black ">Check
+                    <button href="javascript:void(0)"
+                        onclick="document.getElementById('userprofile').style.display='block'; price()"
+                        class=" w3-margin-bottom w3-button w3-right mt-3 btn-primary w3-black ">Check
                         Price</button>
-                    
+
                 </div>
 
             </div>
@@ -262,17 +301,21 @@
     </div>
 
 
-    <!-- User Profile -->
+    <!-- check price -->
     <div id="userprofile" class="w3-modal">
         <div class="w3-modal-content w3-animate-zoom" style="padding: 32px">
             <div class="w3-container w3-white w3-center">
-                <i onclick="document.getElementById('userprofile').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+                <i onclick="document.getElementById('userprofile').style.display='none'"
+                    class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
                 <br />
                 <div class="w3-auto ">
 
 
                     <h3 class="display"><b>City : </b>
                         <p id="city_re" class="sub-display"></p>
+                    </h3>
+                    <h3 class="display"><b>Marquee : </b>
+                        <p id="marquee_re" class="sub-display"></p>
                     </h3>
                     <h3 class="display"><b>Siting Capacity : </b>
                         <p id="capacity_re" class="sub-display"></p>
@@ -303,6 +346,10 @@
                     </h3>
                     <h3 class="display"><b>RENTAL CAR : </b>
                         <p id="RENTAL_re" class="sub-display"></p>
+                    </h3>
+
+                    <h3 class="display"><b>GST : </b>
+                        <p id="Tax_re" class="sub-display"></p>
                     </h3>
 
                     <h3 class="display"><b>Total Price : </b>
@@ -391,7 +438,8 @@
 
                 <div class="col-md-3 " style="float:left ">
                     <div class="card mb-2 ">
-                        <img class="card-img-top " src="./ss/pexels-andrea-piacquadio-3755706.jpg " alt="Card image cap ">
+                        <img class="card-img-top " src="./ss/pexels-andrea-piacquadio-3755706.jpg "
+                            alt="Card image cap ">
                         <div class="card-body ">
                             <h4 class="card-title ">Marque to be added</h4>
                             <p class="card-text ">info about marque</p>
@@ -449,14 +497,17 @@
         </ol>
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="d-block w-100 " src="./ss/pexels-tara-winstead-6479595.jpg " width="1480 " height="620 " alt="First slide ">
+                <img class="d-block w-100 " src="./ss/pexels-tara-winstead-6479595.jpg " width="1480 " height="620 "
+                    alt="First slide ">
 
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100 " src="./images/michu-dang-quang-unItqGJIlRY-unsplash.jpg " width="1480 " height="620 " alt="Second slide ">
+                <img class="d-block w-100 " src="./images/michu-dang-quang-unItqGJIlRY-unsplash.jpg " width="1480 "
+                    height="620 " alt="Second slide ">
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100 " src="./ss/pexels-lukas-574011.jpg " width="1480 " height="620 " alt="Third slide ">
+                <img class="d-block w-100 " src="./ss/pexels-lukas-574011.jpg " width="1480 " height="620 "
+                    alt="Third slide ">
             </div>
         </div>
         <a class="carousel-control-prev " href="#carouselExampleIndicators " role="button " data-slide="prev ">
@@ -479,59 +530,77 @@
 
     <!-- Price Calculating -->
     <script>
-        function price() {
+    function price() {
 
-            var city = document.getElementById('city')
-            var capacity = document.getElementById('capacity')
-            var curry = document.getElementById('curry')
-            var rice = document.getElementById('rice')
-            var salad = document.getElementById('salad')
-            var sweet = document.getElementById('Sweet')
-            var baverage = document.getElementById('baverage')
-            var stage = document.getElementById('stagedecoration')
-            var PHOTOGRAPHER = document.getElementById('PHOTOGRAPHER')
-            var BRIDAL = document.getElementById('BRIDAL_DRESS')
-            var RENTAL_CAR = document.getElementById('RENTAL_CAR')
-            // city = 'ramxan'
-            var city_re = document.getElementById('city_re')
-            var capacity_re = document.getElementById('capacity_re')
-            var curry_re = document.getElementById('curry_re')
-            var rice_re = document.getElementById('rice_re')
-            var salad_re = document.getElementById('salad_re')
-            var sweet_re = document.getElementById('sweet_re')
-            var baverage_re = document.getElementById('baverage_re')
-            var STAGE_re = document.getElementById('STAGE_re')
-            var PHOTOGRAPHER_re = document.getElementById('PHOTOGRAPHER_re')
-            var BRIDAL_re = document.getElementById('BRIDAL_re')
-            var RENTAL_re = document.getElementById('RENTAL_re')
-            var price_re = document.getElementById('price_re')
-            // console.log(city)
-            console.log(typeof capacity.value + typeof curry.value + rice.value + salad.value + baverage.value)
-            var price = parseInt(capacity.value) * (parseInt(curry.value) + parseInt(rice.value) + parseInt(salad
-                .value) + parseInt(baverage.value) + parseInt(sweet.value))
-            price = price + (parseInt(stage.value) + parseInt(BRIDAL.value) + parseInt(RENTAL_CAR.value) + parseInt(
-                PHOTOGRAPHER.value))
-            // console.log("Price total " + price)
-            price_re.innerText = price
+        var city = document.getElementById('city')
+        var marquee = document.getElementById('marquee')
+        var capacity = document.getElementById('capacity')
+        var curry = document.getElementById('curry')
+        var rice = document.getElementById('rice')
+        var salad = document.getElementById('salad')
+        var sweet = document.getElementById('Sweet')
+        var baverage = document.getElementById('baverage')
+        var stage = document.getElementById('stagedecoration')
+        var PHOTOGRAPHER = document.getElementById('PHOTOGRAPHER')
+        var BRIDAL = document.getElementById('BRIDAL_DRESS')
+        var RENTAL_CAR = document.getElementById('RENTAL_CAR')
+        // city = 'ramxan'
+        var city_re = document.getElementById('city_re')
+        var marquee_re = document.getElementById('marquee_re')
+        var tax_re = document.getElementById('Tax_re')
+        var capacity_re = document.getElementById('capacity_re')
+        var curry_re = document.getElementById('curry_re')
+        var rice_re = document.getElementById('rice_re')
+        var salad_re = document.getElementById('salad_re')
+        var sweet_re = document.getElementById('sweet_re')
+        var baverage_re = document.getElementById('baverage_re')
+        var STAGE_re = document.getElementById('STAGE_re')
+        var PHOTOGRAPHER_re = document.getElementById('PHOTOGRAPHER_re')
+        var BRIDAL_re = document.getElementById('BRIDAL_re')
+        var RENTAL_re = document.getElementById('RENTAL_re')
+        var price_re = document.getElementById('price_re')
+        // console.log(city)
+        // converting string to integer
+        var price = parseInt(capacity.value) * (parseInt(curry.value) + parseInt(rice.value) + parseInt(salad
+            .value) + parseInt(baverage.value) + parseInt(sweet.value))
 
-            city_re.innerText = city.value
-            capacity_re.innerText = capacity.value
-            curry_re.innerText = curry.options[curry.selectedIndex].text
-            rice_re.innerText = rice.options[rice.selectedIndex].text
-            salad_re.innerText = salad.options[salad.selectedIndex].text
-            sweet_re.innerText = sweet.options[sweet.selectedIndex].text
-            baverage_re.innerText = baverage.options[baverage.selectedIndex].text
-            STAGE_re.innerText = stage.options[stage.selectedIndex].text
-            PHOTOGRAPHER_re.innerText = PHOTOGRAPHER.options[PHOTOGRAPHER.selectedIndex].text
-            BRIDAL_re.innerText = BRIDAL.options[BRIDAL.selectedIndex].text
-            RENTAL_re.innerText = RENTAL_CAR.options[RENTAL_CAR.selectedIndex].text
-            //options[city.selectedIndex].text;
-           
-        }
+        // Tax calculation
+        let tax = (price * parseFloat(marquee.value)) / 100
+        // Additional services price calculation
+        price = price + (parseInt(stage.value) + parseInt(BRIDAL.value) + parseInt(RENTAL_CAR.value) + parseInt(
+            PHOTOGRAPHER.value))
+
+        // console.log("Price total " + price)
+
+        // console.log("Price total " + price + (price * (paresInet(marquee.value))))
+        price_re.innerText = price + tax
+
+        city_re.innerText = city.value
+        marquee_re.innerText = marquee.options[marquee.selectedIndex].text
+        tax_re.innerText = tax
+        capacity_re.innerText = capacity.value
+        curry_re.innerText = curry.options[curry.selectedIndex].text
+        rice_re.innerText = rice.options[rice.selectedIndex].text
+        salad_re.innerText = salad.options[salad.selectedIndex].text
+        sweet_re.innerText = sweet.options[sweet.selectedIndex].text
+        baverage_re.innerText = baverage.options[baverage.selectedIndex].text
+        STAGE_re.innerText = stage.options[stage.selectedIndex].text
+        PHOTOGRAPHER_re.innerText = PHOTOGRAPHER.options[PHOTOGRAPHER.selectedIndex].text
+        BRIDAL_re.innerText = BRIDAL.options[BRIDAL.selectedIndex].text
+        RENTAL_re.innerText = RENTAL_CAR.options[RENTAL_CAR.selectedIndex].text
+        //options[city.selectedIndex].text;
+
+    }
     </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous ">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous ">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous ">
+    </script>
 
 </body>
 

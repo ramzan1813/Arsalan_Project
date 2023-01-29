@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 05:57 PM
+-- Generation Time: Jan 29, 2023 at 05:04 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -63,8 +63,8 @@ CREATE TABLE `bridal_dress` (
 
 INSERT INTO `bridal_dress` (`Id`, `Dress`, `Price`) VALUES
 (1, 'Shower dec/ 150k', 150000),
-(2, 'Casual dec/20k', 20000),
-(3, 'Meeting dec/20k', 20000);
+(2, 'Casual dec/ 20k', 20000),
+(3, 'Meeting dec/ 20k', 20000);
 
 -- --------------------------------------------------------
 
@@ -74,16 +74,20 @@ INSERT INTO `bridal_dress` (`Id`, `Dress`, `Price`) VALUES
 
 CREATE TABLE `city` (
   `Id` int(5) NOT NULL,
-  `City` varchar(20) NOT NULL
+  `Name` varchar(30) NOT NULL,
+  `City` varchar(20) NOT NULL,
+  `Tax` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `city`
 --
 
-INSERT INTO `city` (`Id`, `City`) VALUES
-(1, 'Islamabad'),
-(21, 'Rawalpindi');
+INSERT INTO `city` (`Id`, `Name`, `City`, `Tax`) VALUES
+(1, 'Raj Marquee', 'Islamabad', 0.7),
+(21, 'Raj Marquee', 'Rawalpindi', 0.12),
+(24, 'New Town Marquee', 'Rawalpindi', 0.45),
+(25, 'Brigdt Marquee', 'Islamabad', 0.6);
 
 -- --------------------------------------------------------
 
@@ -154,8 +158,8 @@ CREATE TABLE `login_info` (
 --
 
 INSERT INTO `login_info` (`CNIC`, `Email`, `Name`, `Phone`, `DOB`, `Password`) VALUES
-('3830211282073', 'rn45819@gmail.com', 'Ramzan Niazi', '03063961138', '2000-12-26', 'Mianwali'),
-('3830211282079', 'akniaxxi@.com', 'Arsalan', '03063961139', '2000-12-26', 'Mianwali');
+('3830211282079', 'akniaxxi@.com', 'Arsalan', '03063961139', '2000-12-26', 'Mianwali'),
+('3830211282213', 'rn45819@gmail.com', 'Ramzan Niazi', '03063961138', '2000-12-26', 'Ramzan');
 
 -- --------------------------------------------------------
 
@@ -197,11 +201,10 @@ CREATE TABLE `rental_car` (
 --
 
 INSERT INTO `rental_car` (`Id`, `Car`, `Price`) VALUES
-(1, 'Toyata GLI /5000', 5000),
+(1, 'Toyata GLI / 5000', 5000),
 (2, 'Toyata XLI/ 5000', 5000),
-(3, 'Toyata forturne/1500', 15000),
-(4, 'Honda civic / 8000', 8000),
-(5, 'Mercedes\'s benz/25000', 25000);
+(3, 'Toyata forturne/ 1500', 15000),
+(4, 'Honda civic / 8000', 8000);
 
 -- --------------------------------------------------------
 
@@ -268,9 +271,9 @@ CREATE TABLE `stage_decoraction` (
 --
 
 INSERT INTO `stage_decoraction` (`Id`, `Service`, `Price`) VALUES
-(1, 'Mehndi special/20k', 20000),
-(2, 'Barat special/50k', 50000),
-(3, 'Bridel match/120k', 120000);
+(1, 'Mehndi special/ 20k', 20000),
+(2, 'Barat special/ 50k', 50000),
+(3, 'Bridel match/ 120k', 120000);
 
 -- --------------------------------------------------------
 
@@ -382,61 +385,61 @@ ALTER TABLE `sweet`
 -- AUTO_INCREMENT for table `beverage_table`
 --
 ALTER TABLE `beverage_table`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `bridal_dress`
 --
 ALTER TABLE `bridal_dress`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `curry_table`
 --
 ALTER TABLE `curry_table`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `photographer`
 --
 ALTER TABLE `photographer`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `rental_car`
 --
 ALTER TABLE `rental_car`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `rice_table`
 --
 ALTER TABLE `rice_table`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `salad_table`
 --
 ALTER TABLE `salad_table`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `stage_decoraction`
 --
 ALTER TABLE `stage_decoraction`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sweet`
 --
 ALTER TABLE `sweet`
-  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

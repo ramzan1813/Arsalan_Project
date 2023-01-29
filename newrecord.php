@@ -4,8 +4,12 @@ require('connection.php');
 if (isset($_POST)) {
     $tableName = $_POST['table'];
     $name = $_POST['city'];
+    // $marquee = '';
 
+    if (isset($_POST['marquee'])) {
 
+        $marquee = $_POST['marquee'];
+    }
     if (isset($_POST['price'])) {
 
         $price = $_POST['price'];
@@ -33,7 +37,7 @@ if (isset($_POST)) {
     }
 
     if ($tableName == "City") {
-        $_query = "INSERT INTO `$tableName` (City) VALUES ('$name')";
+        $_query = "INSERT INTO `$tableName` (Name,City,Tax) VALUES ('$marquee','$name','$price')";
     } else if ($tableName == "beverage_table") {
         //
 
@@ -54,18 +58,18 @@ if (isset($_POST)) {
     $run = mysqli_query($conn, $_query);
     if ($run) {
 ?>
-        <script>
-            alert("New Record Added")
-        </script>
-        <meta HTTP-EQUIV="REFRESH" content="0; url=deshboard.php">
-    <?php
+<script>
+alert("New Record Added")
+</script>
+<meta HTTP-EQUIV="REFRESH" content="0; url=deshboard.php">
+<?php
         // header("Location:dashboard.php");
     } else {
     ?>
-        <script>
-            alert("Input Erorr")
-        </script>
-        <meta HTTP-EQUIV="REFRESH" content="0; url=deshboard.php">
+<script>
+alert("Input Erorr")
+</script>
+<meta HTTP-EQUIV="REFRESH" content="0; url=deshboard.php">
 <?php
         // header("Location:dashboard.php");
     }

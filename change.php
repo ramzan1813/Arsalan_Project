@@ -4,7 +4,6 @@ if (isset($_POST)) {
     $tableName = $_POST['table'];
     $Id = $_POST['id'];
     $Name = $_POST['city'];
-    $price = '';
 
     if (isset($_POST['price'])) {
 
@@ -14,7 +13,7 @@ if (isset($_POST)) {
     // echo $tableName , $Id , $price;
 
     if ($tableName == "City") {
-        $_query = "UPDATE `$tableName` SET `City` = '$Name' WHERE `Id` = '$Id'";
+        $_query = "UPDATE `$tableName` SET `Name` = '$Name', `Tax` =$price WHERE `Id` = '$Id'";
     } else if ($tableName == "beverage_table") {
 
         $_query = "UPDATE `$tableName` SET `Price` = '$price',  Drink ='$Name' WHERE `Id` = '$Id'";
